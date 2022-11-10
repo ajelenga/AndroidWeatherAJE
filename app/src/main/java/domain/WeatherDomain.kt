@@ -2,7 +2,6 @@ package domain
 
 import java.time.LocalDateTime
 
-class WeatherDomain {
     data class WeatherResultDomain(
         val city: WeatherCityDomain? = null,
         val items: List<WeatherItemDomain>? = listOf()
@@ -33,5 +32,5 @@ class WeatherDomain {
     data class WeatherInfoDomain(
         val temp: Double,
         val humidity: Double,
-        val pressure: Double)
-}
+        val pressure: Double
+        )

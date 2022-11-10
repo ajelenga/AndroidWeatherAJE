@@ -1,17 +1,16 @@
 package mapper
 
-import domain.WeatherDomain
+import domain.*
 import dto.WeatherDto
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class Mapper {
-    fun WeatherDto.WeatherResultDto.toDomain() = WeatherDomain.WeatherResultDomain(
+    fun WeatherDto.WeatherResultDto.toDomain() = WeatherResultDomain(
         city = this.city?.toDomain(),
         items = this.list?.map { it.toDomain() },
     )
 
-    fun WeatherDto.WeatherCityDto.toDomain() = WeatherDomain.WeatherCityDomain(
+    fun WeatherDto.WeatherCityDto.toDomain() = WeatherCityDomain(
         name = this.name,
         coord = this.coord.toDomain(),
         population = this.population,
@@ -19,12 +18,12 @@ class Mapper {
         sunset = this.sunset
     )
 
-    fun WeatherDto.CoordinateDto.toDomain() = WeatherDomain.CoordinateDomain(
+    fun WeatherDto.CoordinateDto.toDomain() = CoordinateDomain(
         lat = this.lat,
         lon = this.lon
     )
 
-    fun WeatherDto.WeatherItemDto.toDomain() = WeatherDomain.WeatherItemDomain(
+    fun WeatherDto.WeatherItemDto.toDomain() = WeatherItemDomain(
         date = LocalDateTime.parse(this.dt_txt, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
         image = when {
             main.humidity < 60 -> "1"
@@ -37,9 +36,8 @@ class Mapper {
         this.hour = date.hour.toString()
     }
 
-    fun WeatherDto.WeatherInfoDto.toDomain() = WeatherDomain.WeatherInfoDomain(
+    fun WeatherDto.WeatherInfoDto.toDomain() = WeatherInfoDomain(
         temp = this.temp,
         humidity = this.humidity,
         pressure = this.pressure
     )
-}
