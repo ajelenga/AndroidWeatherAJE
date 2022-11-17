@@ -1,4 +1,4 @@
-package compoments
+package components
 
 import android.view.KeyEvent
 import androidx.compose.animation.AnimatedVisibility
