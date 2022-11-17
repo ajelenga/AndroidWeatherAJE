@@ -3,6 +3,7 @@ package com.example.androidweatheraje
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -13,14 +14,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.example.androidweatheraje.ui.theme.AndroidWeatherAJETheme
+import components.WeatherSearchScreen
 import org.koin.androidx.compose.getViewModel
 import view.WeatherViewModel
 import view.WeatherViewModelState
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalAnimationApi::class, ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -28,6 +33,8 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
                     WeatherList("Brest")
+                    val navHostController = rememberNavController()
+                    WeatherSearchScreen(navHostController = navHostController)
                 }
 
             }
