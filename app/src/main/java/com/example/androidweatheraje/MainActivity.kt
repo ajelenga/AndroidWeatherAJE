@@ -1,5 +1,6 @@
 package com.example.androidweatheraje
 
+import SetupNavGraph
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -34,7 +35,10 @@ class MainActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
                     WeatherList("Brest")
                     val navHostController = rememberNavController()
-                    WeatherSearchScreen(navHostController = navHostController)
+                    //affichage de départ
+                    //WeatherSearchScreen(navHostController = navHostController)
+                    //val navHostController = rememberNavController()
+                    SetupNavGraph(navHostController = navHostController)
                 }
 
             }

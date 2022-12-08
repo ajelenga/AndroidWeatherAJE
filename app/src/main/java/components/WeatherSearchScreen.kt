@@ -109,14 +109,13 @@ fun WeatherSearchScreen(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.End
                 ) {
-                    Button(onClick = {
-
+                   Button(onClick = {
+                        navHostController.navigate(route = "${Screen.WeatherList.route}/${city.name}")
                     }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowForward,
                             contentDescription = stringResource(id = R.string.icn_go_to_details)
-                        )
-                    }
+                        )}
                 }
             } else {
                 Column(
