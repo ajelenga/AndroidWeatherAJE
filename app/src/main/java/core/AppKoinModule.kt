@@ -1,7 +1,11 @@
 package core
 
+import LocationViewModel
 import android.util.Log
 import api.OpenWeatherApi
+import com.example.androidweatheraje.WeatherApplication
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import io.ktor.client.*
 import io.ktor.client.engine.*
 import io.ktor.client.engine.android.*
@@ -19,6 +23,9 @@ import repository.WeatherRepository
 import repository.WeatherRepositoryInterface
 import view.WeatherViewModel
 
+private inline val requireApplication
+    get() = WeatherApplication.instance ?: error("Missing call: initWith(application)")
+
 val appModule = module {
     single<String>(named("weather_api_key")) {
         "888f70e84a4d7e44f3c0d4870c926e9d"
@@ -33,6 +40,8 @@ val appModule = module {
         single { CoroutineScope(Dispatchers.Default + SupervisorJob()) }
         single<WeatherRepositoryInterface> { WeatherRepository(get()) }
         single { OpenWeatherApi(get(), get(named("weather_api_key"))) }
+        single<FusedLocationProviderClient> { LocationServices.getFusedLocationProviderClient(requireApplication.applicationContext) }
+        viewModel { LocationViewModel(client =  get()) }
     }
 
     fun createJson() = Json { isLenient = true; ignoreUnknownKeys = true }

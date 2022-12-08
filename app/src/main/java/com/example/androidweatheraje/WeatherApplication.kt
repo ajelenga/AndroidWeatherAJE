@@ -23,7 +23,11 @@ import view.WeatherViewModelState
 
 
 class WeatherApplication : Application() {
+    companion object {
+        var instance: WeatherApplication? = null
+    }
     override fun onCreate() {
+        instance = this
         super.onCreate()
         startKoin {
             androidContext(this@WeatherApplication)

@@ -1,4 +1,6 @@
 package components
+import LocationPermissionIcon
+import android.location.Location
 import android.view.KeyEvent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Row
@@ -26,7 +28,9 @@ fun WeatherSearchBar(
     searchText: String,
     placeholderText: String = "",
     onSearchTextChanged: (String) -> Unit = {},
-    onClearClick: () -> Unit = {}
+    onClearClick: () -> Unit = {},
+    onLocateSearching: (value: Boolean) -> Unit = {},
+    onLocateChange: (location: Location) -> Unit = {}
 ) {
     var showClearButton by remember { mutableStateOf(false) }
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -64,6 +68,7 @@ fun WeatherSearchBar(
                         )
                     }
                 }
+                LocationPermissionIcon(locationSearching =onLocateSearching , locationChange = onLocateChange)
             }
         },
         maxLines = 1,
