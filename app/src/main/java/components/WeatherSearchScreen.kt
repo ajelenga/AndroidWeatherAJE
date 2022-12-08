@@ -25,6 +25,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
+import view.CityViewModel
 import view.WeatherViewModel
 import view.WeatherViewModelState
 
@@ -108,6 +109,14 @@ fun WeatherSearchScreen(
             }  else if (state.city != null && state.first != null) {
                 val city = state.city!!
                 val item = state.first!!
+
+                WeatherMap(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(10.dp)
+                        .weight(1f),
+                    viewModel = CityViewModel(city = city)
+                )
 
                 WeatherDetailsItem(
                     modifier = Modifier
